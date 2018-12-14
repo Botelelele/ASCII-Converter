@@ -90,7 +90,7 @@ int main(int argc,char*argv[])
 int RGBAtoGray(Uint8* r,Uint8* g,Uint8* b,Uint8* a)
 {
     Uint8 value=((*r+1)>>7)+((*g+1)>>7)+((*b+1)>>7)+((*a+1)>>7);
-    if(value!=0)//to prevent function from returning -1
+    if(value!=0)//to prevent function from returning  -1
     {
         return value-1;
     }
