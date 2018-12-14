@@ -1,48 +1,54 @@
 #include <SDL2/SDL.h>
-#include <string>
 #include <SDL2/SDL_image.h>
+#include <string>
 #include <fstream>
 using namespace std;
+//function coverting tgb to gray scale
+//returns value that equals from 0 to 7
 int RGBAtoGray(Uint8* r, Uint8* g, Uint8* b, Uint8* a);
 int main(int argc,char*argv[])
 {
-    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Init(SDL_INIT_EVERYTHING);//initializing the SDL
 
-    SDL_Surface*surface=NULL;
-    fstream str;
-    char decoder[]={'.',
+    SDL_Surface*surface=NULL;//declaring and defining the structure that hold our surface
+    fstream str;//stream used to save our output
+    
+    char decoder[]={'.',//table that is contained with characters used to convert gray scale value to ascii
     ',',
     '*',
     '^',
     ';',
     'i',
     '!',
-    '#'
-    };
-    string*path=new string;
-    string *output=new string;
+    '#'};
+    
+    string*path=new string;//pointer to our path to picture
+    string *output=new string;//output saved in output.txt
+    
     if(argc<2){SDL_Log("Insufficient amount of arguments...");return 0;}
     else
     {
         *path=argv[1];
     }
-    surface=IMG_Load(path->c_str());
-    //600*450
-    if(surface!=NULL)
+    
+    surface=IMG_Load(path->c_str());//load the picture
+
+    if(surface!=NULL)//if surface is loaded properly
     {
         Uint8 r,g,b,a;
-        a=255;
-        int value;
-        int height=surface->h;
-        SDL_LockSurface(surface);
-        int bytes=(int)(surface->format->BytesPerPixel);
-        Uint8* pixels=(Uint8*)surface->pixels;
+        a=255;//just in case if the picture is in RGB format
+        int value;//value of our gray scale
+        int height=surface->h;//height of our picture
+        
+        SDL_LockSurface(surface);//allows us to get access to pixels
+        int bytes=(int)(surface->format->BytesPerPixel);//coun of bytes in pixel - deciding whether it is RGB or RGBA
+        Uint8* pixels=(Uint8*)surface->pixels;//pointer to our pixels - exactlyt to one
         int pitch=surface->pitch;
         for(unsigned int x=0;x<pitch;x+=bytes)
         {
             for(unsigned int y=0;y<height;y++)
             {
-                switch(bytes)
+                switch(bytes)//check whether the picture is in RGB or RGBA
                 {
                 case 3:
                     {
@@ -66,10 +72,11 @@ int main(int argc,char*argv[])
         str<<*output;
         str.close();
     }
-    else
+    else//if not return the error code
     {
         SDL_Log(SDL_GetError());
     }
+    //clear the memory
     delete path;
     delete output;
     SDL_FreeSurface(surface);
