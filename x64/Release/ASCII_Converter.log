@@ -1,0 +1,8 @@
+﻿  ASCII_Converter.cpp
+A:\Visual\repos\ASCII_Converter\ASCII_Converter.cpp(47,30): warning C4018: '<': signed/unsigned mismatch
+A:\Visual\repos\ASCII_Converter\ASCII_Converter.cpp(49,31): warning C4018: '<': signed/unsigned mismatch
+  Generating code
+  Previous IPDB not found, fall back to full compilation.
+  All 176 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  ASCII_Converter.vcxproj -> A:\Visual\repos\ASCII_Converter\x64\Release\ASCII_Converter.exe
